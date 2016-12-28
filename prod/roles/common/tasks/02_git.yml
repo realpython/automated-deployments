@@ -1,0 +1,10 @@
+##
+# Clone and pull the repo
+##
+- name: Set up git configuration
+  dnf: name=git state=latest
+  become: yes
+
+- name: Clone or pull the latest code
+  git: repo={{ code_repository_url }}
+        dest={{ app_dir }}

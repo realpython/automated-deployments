@@ -1,0 +1,17 @@
+##
+# Run db migrations and get all static files
+##
+- name: Make migrations
+  shell: ". {{ app_dir }}/.env; {{ venv_python }} {{ app_dir }}/manage.py makemigrations "
+  become: yes
+
+- name: Migrate database
+  django_manage: app_path={{ app_dir }}
+                                 command=migrate
+                                 virtualenv={{ venv_dir }}
+
+- name: Get all static files
+  django_manage: app_path={{ app_dir }}
+                                 command=collectstatic
+                                 virtualenv={{ venv_dir }}
+  become: yes

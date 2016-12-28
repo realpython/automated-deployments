@@ -1,0 +1,12 @@
+##
+# Configure nginx web server
+##
+- name: Set up nginx config
+  dnf: name=nginx state=latest
+  become: yes
+
+- name: Write nginx conf file
+  template: src=django_bootstrap.conf dest=/etc/nginx/conf.d/{{ app_name }}.conf
+  become: yes
+  notify:
+    - restart nginx

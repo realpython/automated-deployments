@@ -1,0 +1,40 @@
+# App Name
+app_name: django_bootstrap
+
+# Deployer User and Groups
+deployer_user: deployer
+deployer_group: deployers
+
+# SSH Keys Directory
+ssh_dir: /Users/michael.herman/repos/realpython/automated-deployments/ssh-keys
+
+
+# Github Code's Repo URL
+code_repository_url: https://github.com/realpython/django-bootstrap
+
+# App Directory
+app_dir: /home/{{ deployer_user }}/{{app_name}}
+
+# DB Configuration
+db_url: postgresql://{{deployer_user}}:{{db_password}}@localhost/{{app_name}}
+db_password: thisissomeseucrepassword
+db_name: "{{ app_name }}"
+db_user: "{{ deployer_user }}"
+
+# Application Dependencies Setup
+venv_dir: '/home/{{ deployer_user }}/envs/{{ app_name }}'
+venv_python: '{{ venv_dir }}/bin/python3.5'
+
+# Remote Server Details
+server_ip: 104.236.66.172
+wsgi_server_port: 8000
+
+
+# Deploy Dir in App Directory
+deploy_dir: '{{ app_dir }}/deploy'
+
+# WSGI Vars
+django_wsgi_module: config.wsgi
+django_settings_module: config.settings.production
+django_secret_key: 'changeme'
+database_url: '{{ db_url }}'

@@ -1,0 +1,10 @@
+##
+# Set up systemd for executing gunicorn_start script
+##
+- name: write a systemd service file
+  template: src=django-bootstrap.service
+                    dest=/etc/systemd/system
+  become: yes
+  notify:
+    - restart app
+    - restart nginx

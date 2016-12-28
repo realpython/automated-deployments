@@ -1,0 +1,15 @@
+##
+# Set up Gunicorn and configure systemd to execute gunicorn_start script
+##
+- name: Create a deploy directory
+  file: path={{ deploy_dir }} state=directory
+  become: yes
+
+- name: Create the gunicorn_start script for running our app from systemd service
+  template: src=gunicorn_start
+                    dest={{ deploy_dir }}/gunicorn_start
+  become: yes
+
+- name: Make the gunicorn_start script executable
+  raw: cd {{ deploy_dir }}; chmod +x gunicorn_start
+  become: yes

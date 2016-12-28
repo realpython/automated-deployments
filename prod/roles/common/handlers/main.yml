@@ -1,0 +1,11 @@
+- name: restart postgres
+  service: name=postgresql state=restarted
+  become: yes
+
+- name: restart nginx
+  service: name=nginx state=restarted enabled=yes
+  become: yes
+
+- name: restart app
+  service: name=django-bootstrap state=restarted enabled=yes
+  become: yes
